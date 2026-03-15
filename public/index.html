@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>March Madness Bracket Pool</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-inner">
+        <div class="logo">
+          <span class="logo-icon">🏀</span>
+          <h1>MARCH MADNESS</h1>
+          <span class="logo-sub">BRACKET POOL</span>
+        </div>
+        <nav id="nav" class="nav hidden">
+          <button class="nav-btn active" data-page="bracket">My Brackets</button>
+          <button class="nav-btn" data-page="leaderboard">Leaderboard</button>
+          <button class="nav-btn" data-page="scores">Live Scores</button>
+          <button class="nav-btn logout-btn" id="logoutBtn">Sign Out</button>
+          <span class="user-badge" id="userBadge"></span>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Auth Screen -->
+    <div id="authScreen" class="screen auth-screen">
+      <div class="auth-card">
+        <div class="auth-header">
+          <span class="big-ball">🏀</span>
+          <h2>Welcome to the Pool!</h2>
+          <p>Pick your teams. Win bragging rights.</p>
+        </div>
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="login">Sign In</button>
+          <button class="auth-tab" data-tab="register">Sign Up</button>
+        </div>
+        <form id="loginForm" class="auth-form">
+          <div class="form-group">
+            <label>Screen Name</label>
+            <input type="text" id="loginName" placeholder="Your screen name" maxlength="20" required>
+          </div>
+          <div class="form-group">
+            <label>Key Code</label>
+            <input type="password" id="loginCode" placeholder="Your secret code" maxlength="20" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Let's Go!</button>
+        </form>
+        <form id="registerForm" class="auth-form hidden">
+          <div class="form-group">
+            <label>Choose a Screen Name</label>
+            <input type="text" id="regName" placeholder="e.g. HoopsKing42" maxlength="20" required>
+          </div>
+          <div class="form-group">
+            <label>Create a Key Code</label>
+            <input type="password" id="regCode" placeholder="Min 4 characters" maxlength="20" required>
+            <small>Remember this! It's your password.</small>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Join the Pool!</button>
+        </form>
+        <div id="authError" class="error-msg hidden"></div>
+      </div>
+    </div>
+
+    <!-- Bracket List Screen -->
+    <div id="bracketScreen" class="screen hidden">
+      <div class="container">
+        <div class="section-header">
+          <h2>🏆 My Brackets</h2>
+          <button class="btn btn-primary" id="newBracketBtn">+ New Bracket</button>
+        </div>
+        <div id="bracketList" class="bracket-list">
+          <div class="empty-state">
+            <span class="empty-icon">📋</span>
+            <p>No brackets yet! Create one to get started.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bracket Editor Screen -->
+    <div id="editorScreen" class="screen hidden">
+      <div class="container">
+        <div class="section-header">
+          <button class="btn btn-outline" id="backBtn">← Back</button>
+          <h2 id="editorTitle">Edit Bracket</h2>
+          <button class="btn btn-primary" id="saveBracketBtn">Save Bracket</button>
+        </div>
+        <div id="bracketEditor" class="bracket-editor">
+          <!-- Bracket grid will be rendered here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Leaderboard Screen -->
+    <div id="leaderboardScreen" class="screen hidden">
+      <div class="container">
+        <div class="section-header">
+          <h2>🏆 Leaderboard</h2>
+          <button class="btn btn-outline" id="refreshLeaderboard">Refresh</button>
+        </div>
+        <div class="scoring-info">
+          <h3>Scoring System</h3>
+          <div class="scoring-chips">
+            <span class="chip">Rd 64: 1pt</span>
+            <span class="chip">Rd 32: 2pts</span>
+            <span class="chip">Sweet 16: 4pts</span>
+            <span class="chip">Elite 8: 8pts</span>
+            <span class="chip">Final 4: 16pts</span>
+            <span class="chip">Champ: 32pts</span>
+          </div>
+        </div>
+        <div id="leaderboardTable" class="leaderboard-wrap">
+          <div class="empty-state"><p>No brackets submitted yet.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Scores Screen -->
+    <div id="scoresScreen" class="screen hidden">
+      <div class="container">
+        <div class="section-header">
+          <h2>📡 Tournament Results</h2>
+        </div>
+        <div id="tournamentResults" class="tournament-results">
+          <div class="empty-state"><p>Loading tournament data...</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">New Bracket</h3>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
