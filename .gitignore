@@ -1,3 +1,5 @@
 node_modules/
 marchmadness.db
+marchmadness.db-shm
+marchmadness.db-wal
 .env
