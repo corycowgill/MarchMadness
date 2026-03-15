@@ -1,7 +1,14 @@
 const Database = require('better-sqlite3');
 const path = require('path');
 
-const DB_PATH = process.env.DB_PATH || path.join(__dirname, 'marchmadness.db');
+const fs = require('fs');
+
+// Use /data if it exists (Render persistent disk), otherwise local directory
+let dbDir = path.join(__dirname);
+if (fs.existsSync('/data')) {
+  dbDir = '/data';
+}
+const DB_PATH = process.env.DB_PATH || path.join(dbDir, 'marchmadness.db');
 const db = new Database(DB_PATH);
 
 db.pragma('journal_mode = WAL');

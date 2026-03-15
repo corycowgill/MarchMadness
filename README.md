@@ -2,6 +2,14 @@
 
 A fun, easy-to-use bracket pool app for family and friends. No email required — just pick a screen name and a secret code to join!
 
+## 🚀 One-Click Deploy
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/corycowgill/MarchMadness)
+
+**That's it!** Click the button above, sign up for a free Render account (use your Google or GitHub login), and your app will be live in about 2 minutes. Render will give you a URL like `https://march-madness-brackets-xxxx.onrender.com` — share that with your family and friends!
+
+> **Note:** Render's free tier sleeps after 15 minutes of inactivity. The first visit after sleeping takes ~30 seconds to wake up. After that it's fast. If you want it always-on, upgrade to their $7/month plan.
+
 ## Features
 
 - **Simple sign-up**: Screen name + key code (no email needed)
@@ -14,35 +22,26 @@ A fun, easy-to-use bracket pool app for family and friends. No email required �
 - **Sports-themed UI**: Dark mode, basketball-inspired design
 - **Mobile friendly**: Works on phones and tablets
 
-## How to Deploy (Easy!)
+## How to Deploy
 
-### Option 1: Railway.app (Recommended — Easiest!)
+### Option 1: Render.com (Recommended — Free!)
 
-1. Go to [railway.app](https://railway.app) and sign up with your GitHub account
-2. Click **"New Project"** → **"Deploy from GitHub Repo"**
-3. Select this repository
-4. Railway will auto-detect and deploy it!
-5. Go to **Settings → Networking** and click **"Generate Domain"** to get your public URL
-6. **Important**: Add a Volume mount:
-   - Go to your service → **Settings → Volumes**
-   - Click **"Add Volume"**
-   - Mount path: `/data`
-   - This keeps your database data saved between deploys
+Just click the deploy button above! Or manually:
 
-**Environment Variables** (optional, set in Railway dashboard):
-- `ADMIN_CODE` — Password for admin features (default: `admin2026`)
-- `PORT` — Automatically set by Railway
+1. Go to [render.com](https://render.com) and sign up with Google or GitHub
+2. Click **"New" → "Blueprint"**
+3. Connect your GitHub account and select this repository
+4. Render reads the `render.yaml` file and sets everything up automatically
+5. Click **"Apply"** — done! Your app will be live in ~2 minutes
+6. Find your URL in the Render dashboard
 
-### Option 2: Render.com
+### Option 2: Railway.app
 
-1. Go to [render.com](https://render.com) and sign up
-2. Click **"New" → "Web Service"**
-3. Connect your GitHub repo
-4. Settings:
-   - Build Command: `npm install`
-   - Start Command: `node server.js`
-5. Add a **Disk** at mount path `/data` for database persistence
-6. Set environment variable: `DB_PATH=/data/marchmadness.db`
+1. Go to [railway.app](https://railway.app) and sign up with GitHub
+2. Click **"New Project" → "Deploy from GitHub Repo"**
+3. Select this repository — Railway auto-detects the config
+4. In **Settings → Networking**, click **"Generate Domain"**
+5. In **Settings → Volumes**, add a volume at mount path `/data`
 
 ### Option 3: Run Locally
 
@@ -54,9 +53,13 @@ npm start
 
 ## Admin Features
 
-Use the admin code (default: `admin2026`) to:
+After deploying, Render auto-generates your admin code. Find it in your Render dashboard under **Environment Variables → ADMIN_CODE**.
+
+If running locally, the default admin code is `admin2026`.
+
+Admin lets you:
 - Update game results and scores
-- Lock brackets when tournament starts
+- Lock brackets when the tournament starts
 - Fetch live scores from ESPN
 
 ## Scoring System

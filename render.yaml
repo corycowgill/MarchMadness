@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: march-madness-brackets
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ADMIN_CODE
+        generateValue: true
+    disk:
+      name: march-madness-data
+      mountPath: /data
+      sizeGB: 1
